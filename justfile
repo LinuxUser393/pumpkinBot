@@ -78,6 +78,7 @@ run-remote-git:
 		fi; \
 		cd ~/pumpkinBot; \
 		git reset --hard HEAD; \
+		git clean -f; \
 		git pull; \
 		just run-local "
 
