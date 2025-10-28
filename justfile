@@ -23,7 +23,14 @@ local-setup:
 	-git clone --depth 1 -b v3.0 https://github.com/sunfounder/picrawler.git ~/picrawler
 	cd ~/picrawler; sudo python3 setup.py install
 	sudo raspi-config nonint do_i2c 1
+	@echo \#\#\#\#\#\#\#\#\#\#\# When it asks you to reboot, choose no. Reboot after all commands have finished. \#\#\#\#\#\#\#\#\#
+	sleep 2
 	cd ~/picrawler; sudo bash i2samp.sh -y
+	-git clone --depth 1 https://github.com/adafruit/Raspberry-Pi-Installer-Scripts ~/adafruit_i2samp_installer
+	sudo pip3 install adafruit-python-shell --break-system-packages
+	@echo \#\#\#\#\#\#\#\#\#\#\# When it asks you to reboot, choose no. Reboot after all commands have finished. \#\#\#\#\#\#\#\#\#
+	sleep 2
+	cd ~/adafruit_i2samp_installer; sudo python3 i2samp.py -y
 
 # Setup the python virtual environment. Re-run this anytime the requirements.txt have changed.
 venv-setup:
