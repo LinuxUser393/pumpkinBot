@@ -1,21 +1,29 @@
 from gtts import gTTS
 import os
 
-print("Welcome to GTTS Maker")
-print("")
+print("Running the gTTS maker!")
+print("Generating mp3 files...")
 
-speech = input("What do you want your speech to be? ")
-file_name = input("What do you want the file name to be (the .mp3 will be added automatically at the end)? ")
+# "phrase": "filename"
+phrases = {
+    "Testing": "testing"  # .mp3
+}
+
+sound_dir = 'sounds'
 language = 'en'  # English
 
-# Create a gTTS object
-tts_obj = gTTS(text=speech, lang=language, slow=False)
+if not os.path.exists(sound_dir):
+    os.mkdir(sound_dir)
 
-file = file_name + ".mp3"
-# Save the audio to an MP3 file
-tts_obj.save(file)
+for phrase, file_name in phrases.items():
+    # Create a gTTS object
+    tts_obj = gTTS(text=phrase, lang=language, slow=False)
 
-# Play the audio (requires a local media player)
-os.system("paplay " + file)
+    file = os.path.join(sound_dir, file_name + ".mp3")
+    # Save the audio to an MP3 file
+    tts_obj.save(file)
 
-print("File has been saved as " + file)
+    # Play the audio (requires a local media player)
+    os.system("paplay " + file)
+
+    print("File has been saved as " + file)
